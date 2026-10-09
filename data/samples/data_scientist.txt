@@ -1,0 +1,5 @@
+Peter Parker
+4 years of experience in data analysis and predictive modeling.
+Email: peter@example.com
+Technical Skills: Python, Pandas, NumPy, Scikit-learn, SQL, Git.
+Education: Statistics.

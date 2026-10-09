@@ -1,0 +1,5 @@
+Bruce Wayne
+5 years of experience building backend services.
+Email: bruce@example.com
+Technical Skills: Python, FastAPI, PostgreSQL, REST API, Docker, Git.
+Education: Software Engineering.

@@ -1,0 +1,5 @@
+Wednesday Addams
+3 years of experience developing web applications.
+Email: wednesday@example.com
+Technical Skills: JS, React.js, NodeJS, Postgres, Git.
+Education: Computer Science.
