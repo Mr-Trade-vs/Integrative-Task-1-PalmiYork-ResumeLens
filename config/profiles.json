@@ -1,0 +1,22 @@
+{
+  "Full Stack Developer": {
+    "domain": "software engineering",
+    "required": ["JAVASCRIPT", "REACT", "NODE_JS", "POSTGRESQL", "GIT"],
+    "order": ["JAVASCRIPT", "REACT", "NODE_JS", "POSTGRESQL", "GIT"]
+  },
+  "Machine Learning Engineer": {
+    "domain": "AI/data",
+    "required": ["PYTHON", "PANDAS", "SCIKIT_LEARN", "TENSORFLOW", "POSTGRESQL", "GIT"],
+    "order": ["PYTHON", "PANDAS", "SCIKIT_LEARN", "TENSORFLOW", "POSTGRESQL", "GIT"]
+  },
+  "Backend Developer": {
+    "domain": "software engineering",
+    "required": ["PYTHON", "FASTAPI", "POSTGRESQL", "REST_API", "DOCKER", "GIT"],
+    "order": ["PYTHON", "FASTAPI", "POSTGRESQL", "REST_API", "DOCKER", "GIT"]
+  },
+  "Data Scientist": {
+    "domain": "AI/data",
+    "required": ["PYTHON", "PANDAS", "NUMPY", "SCIKIT_LEARN", "SQL", "GIT"],
+    "order": ["PYTHON", "PANDAS", "NUMPY", "SCIKIT_LEARN", "SQL", "GIT"]
+  }
+}
