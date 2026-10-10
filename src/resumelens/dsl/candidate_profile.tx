@@ -1,0 +1,8 @@
+Model: candidate=Candidate;
+Candidate: 'candidate' name=STRING '{' contact=Contact experience*=Experience education*=Education skill*=Skill classification*=Classification '}';
+Contact: 'contact' '{' email=STRING phone=STRING '}';
+Experience: 'experience' company=STRING role=STRING years=INT ';';
+Education: 'education' value=STRING ';';
+Skill: 'skill' value=STRING ';';
+Classification: 'classification' profile=ID result=RESULT ';';
+RESULT: /ACCEPTED|REJECTED/;
