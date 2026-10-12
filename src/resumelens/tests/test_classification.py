@@ -1,4 +1,6 @@
-from resumelens.classification.automata import accepts, explain
+from pyformlang.finite_automaton import DeterministicFiniteAutomaton, Symbol
+
+from resumelens.classification.automata import accepts, build_dfa, explain
 
 def test_full_stack_pattern_accepts_required_sequence():
     order = ["JAVASCRIPT", "REACT", "NODE_JS", "POSTGRESQL", "GIT"]
@@ -8,7 +10,22 @@ def test_extra_qualification_is_allowed():
     order = ["JAVASCRIPT", "REACT", "NODE_JS", "POSTGRESQL", "GIT"]
     assert accepts([*order, "DOCKER"], order)
 
+
+def test_build_dfa_uses_pyformlang_and_allows_extra_canonical_symbols():
+    order = ["JAVASCRIPT", "REACT", "NODE_JS"]
+    dfa = build_dfa(order)
+
+    assert isinstance(dfa, DeterministicFiniteAutomaton)
+    assert dfa.accepts([Symbol("JAVASCRIPT"), Symbol("PYTHON"), Symbol("REACT"), Symbol("NODE_JS")])
+
+
 def test_missing_qualification_is_rejected():
     order = ["JAVASCRIPT", "REACT", "NODE_JS", "POSTGRESQL", "GIT"]
     assert not accepts(["JAVASCRIPT", "REACT", "NODE_JS", "GIT"], order)
     assert "missing" in explain(["JAVASCRIPT"], order)
+
+
+def test_required_order_is_enforced_by_the_dfa():
+    order = ["JAVASCRIPT", "REACT", "NODE_JS"]
+
+    assert not accepts(["REACT", "JAVASCRIPT", "NODE_JS"], order)

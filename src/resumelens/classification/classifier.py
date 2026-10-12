@@ -7,5 +7,5 @@ def classify(sorted_by_profile: dict[str, list[str]], profiles: dict) -> list[Cl
         seq = sorted_by_profile[name]
         required = profile["required"]
         accepted = accepts(seq, required)
-        results.append(ClassificationResult(name, accepted, seq, explain(seq, required)))
+        results.append(ClassificationResult(name, accepted, seq, explain(seq, required, accepted)))
     return results

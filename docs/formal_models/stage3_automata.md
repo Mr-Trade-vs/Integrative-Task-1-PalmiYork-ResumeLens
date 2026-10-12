@@ -9,12 +9,12 @@ Each profile is modeled as a DFA:
 For an order of `n` required qualifications:
 
 - **Q** = `{q0, q1, ..., qn}`
-- **Σ** = canonical qualification symbols used by the profile
-- **δ** = expected qualification advances the state; other symbols self-loop
+- **Σ** = canonical qualification symbols emitted by the normalization stage, together with any required profile symbols
+- **δ** = the next required qualification advances the state; every other symbol in `Σ` self-loops
 - **q0** = initial state
 - **F** = `{qn}`
 
-The canonical sorting stage places required qualifications in the profile's expected order. This makes the DFA interpretation explicit and deterministic.
+The classifier constructs this DFA with `pyformlang.finite_automaton.DeterministicFiniteAutomaton` and evaluates the canonical sequence with the automaton's `accepts` method. The canonical sorting stage places required qualifications in the profile's expected order, so a candidate's original résumé ordering does not affect the result. Recognized qualifications outside the profile's requirements use self-loops.
 
 ## Full Stack Developer
 
@@ -48,4 +48,4 @@ Pattern:
   +--other symbols----+--other symbols-------------------+  self-loop
 ```
 
-The implementation uses `pyformlang.finite_automaton.DeterministicFiniteAutomaton` when installed.
+The profile criteria and their expected sequence remain configured in `config/profiles.json`; the same DFA construction and evaluation logic is used for all four profiles.
