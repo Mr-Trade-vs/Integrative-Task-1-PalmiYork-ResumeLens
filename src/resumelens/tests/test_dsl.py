@@ -15,5 +15,5 @@ def test_generator_produces_expected_structure():
 def test_textx_validation_when_installed():
     parser = pytest.importorskip("textx")
     from resumelens.dsl.parser import validate
-    model = validate('''candidate "Test" { contact "test@example.com" "12345678" experience "Acme" "Engineer" 2; skill "Python"; classification Data_Scientist ACCEPTED; }''')
+    model = validate('''candidate "Test" { contact { "test@example.com" "12345678" } experience "Acme" "Engineer" 2; skill "Python"; classification Data_Scientist ACCEPTED; }''')
     assert model.candidate.name == "Test"

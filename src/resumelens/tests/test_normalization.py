@@ -1,4 +1,5 @@
-from resumelens.normalization import normalize, sort_for_profile
+from resumelens.normalization.transducer import normalize
+from resumelens.normalization.sorter import sort_for_profile
 
 def test_aliases_normalize_to_canonical_tokens():
     values, mapping = normalize(["JS", "React.js", "NodeJS", "Postgres", "Git"])
