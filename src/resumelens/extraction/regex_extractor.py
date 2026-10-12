@@ -5,7 +5,7 @@ PATTERNS = {
     "email": re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b"),
     "phone": re.compile(r"(?<!\d)(?:\+?\d[\d\s().-]{7,}\d)(?!\d)"),
     "years_experience": re.compile(r"\b(\d+)\+?\s+years?\s+(?:of\s+)?(?:professional\s+)?experience\b", re.I),
-    "programming_languages": re.compile(r"\b(?:JavaScript|Javascript|JS|TypeScript|TS|Python|Java|C#|C\+\+|Go|Golang|Ruby|PHP|Kotlin|Swift|SQL)\b", re.I),
+    "programming_languages": re.compile(r"(?<!\w)(?:JavaScript|Javascript|JS|TypeScript|TS|Python|Java|C\+\+|C#|Go|Golang|Ruby|PHP|Kotlin|Swift|SQL)(?!\w)", re.I),
     "frameworks_libraries": re.compile(r"\b(?:React(?:\.js|JS)?|Angular|Vue(?:\.js)?|Node(?:\.js|JS)?|Django|Spring\s*Boot|Express(?:\.js)?|FastAPI|Flask|Pandas|NumPy|Scikit[- ]learn|sklearn|TensorFlow|PyTorch|Keras)\b", re.I),
     "databases": re.compile(r"\b(?:PostgreSQL|Postgres|MySQL|MariaDB|MongoDB|Mongo|Redis|SQLite|Oracle|SQL Server|DynamoDB)\b", re.I),
     "tools": re.compile(r"\b(?:Git|Docker|Kubernetes|Jenkins|AWS|Azure|GCP|Linux|REST(?:ful)?|GraphQL|Kafka)\b", re.I),
