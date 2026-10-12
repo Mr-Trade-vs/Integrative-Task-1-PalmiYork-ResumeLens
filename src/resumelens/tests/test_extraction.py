@@ -1,4 +1,4 @@
-from src.resumelens.extraction import extract
+from resumelens.extraction import extract
 
 def test_extracts_resume_fields():
     text = "Ana\n3 years of experience. Email ana@example.com. Skills: JS, React.js, NodeJS, Postgres, Git."
