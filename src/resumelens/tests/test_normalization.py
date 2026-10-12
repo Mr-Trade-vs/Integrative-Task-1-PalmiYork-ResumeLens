@@ -1,7 +1,7 @@
 import pytest
 
 from resumelens.normalization.transducer import (
-    build_pyformlang_transducer,
+    build_pyformlang_FST,
     normalize,
     normalize_one,
 )
@@ -35,12 +35,12 @@ def test_normalization_handles_case_whitespace_duplicates_and_unknowns():
     assert normalize_one(" Unlisted Tool ") is None
 
 
-def test_pyformlang_transducer_translates_aliases_when_available():
-    transducer = build_pyformlang_transducer()
-    if transducer is None:
+def test_pyformlang_FST_translates_aliases_when_available():
+    fst = build_pyformlang_FST()
+    if fst is None:
         pytest.skip("pyformlang is not installed")
 
-    assert list(transducer.translate(["react.js"])) == [["REACT"]]
+    assert list(fst.translate(["react.js"])) == [["REACT"]]
 
 
 def test_sorting_is_profile_specific():
