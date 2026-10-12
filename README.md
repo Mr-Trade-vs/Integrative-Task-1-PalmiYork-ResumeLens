@@ -35,9 +35,9 @@ ResumeLens/
 ├── config/
 ├── data/
 ├── docs/
-├── src/
-│   └── resumelens/
-└── tests/
+└── src/
+    ├──resumelens/
+    └──tests/
 ```
 
 ## Installation
@@ -53,7 +53,7 @@ Create a virtual environment and install the dependencies:
 
 ```bash
 py -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\activate
 py -m pip install -r requirements.txt
 ```
 
@@ -66,15 +66,6 @@ py -m streamlit run app.py
 ## Run Tests
 
 ```bash
+cd src
 py -m pytest -v
 ```
-
-## Academic Context
-
-This project was developed for **Computation and Discrete Structures III**, as part of Integrative Task 1, during the 2026-2 academic period.
-
-**Team:** PalmiYork
-
-## License
-
-This project was developed for academic purposes.
