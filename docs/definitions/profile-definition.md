@@ -1,55 +1,90 @@
-## Definition Profile:
+# Profile Definition
 
-**Full Stack Developer** could include the next qualifications (by Integrative Task assigment text):
+## Overview
 
-- React, Angular, or Vue
-- JavaScript or TypeScript
-- Node.js, Django, Spring Boot, or similar backed technology
-- SQL or NoSQL databases
-- REST APIs
-- Git
+ResumeLens defines four professional profiles for candidate classification. Each profile is configured in `config/profiles.json` and contains three attributes:
 
----
+- **Domain:** The professional area associated with the profile.
+- **Required qualifications:** The canonical qualifications that must be present for the profile to be recognized.
+- **Qualification order:** The sequence in which qualifications are expected during profile classification.
 
-**Machine Learning Engineer** include next qualifications (by Integrative Task assigment text):
+The profile definitions used by the current implementation are described below.
 
-- Python
-- Pandas or NumPy
-- Scikit-learn
-- TensorFlow, or PyTorch
-- Machine-learning model development
-- SQL
-- Git
+## 1. Full Stack Developer
 
----
+**Domain:** Software Engineering
 
-**Backend Developer** potential qualifications defined by our team:
+**Required qualifications:**
+- `JAVASCRIPT`
+- `REACT`
+- `NODE_JS`
+- `POSTGRESQL`
+- `GIT`
 
-- Go
-- Express.js
-- REST API development
-- JWT authentication
-- Database Transactions and ACID concepts
+**Qualification order:**
 
----
+`JAVASCRIPT → REACT → NODE_JS → POSTGRESQL → GIT`
 
-**Data Scientist** potential qualifications defined by our team:
+A candidate matches this profile when the implementation recognizes the required qualifications in the configured order.
 
-- Python
-- Pandas
-- NumPy
-- Statistical analysis
-- Exploratory Data Analysis (EDA)
-- Data Visualization
-- Hypothesis testing
-- Matplotlib
+## 2. Machine Learning Engineer
 
-Troubles that we must consider it:
+**Domain:** AI/Data
 
-1. Also some of this qualifications could appear in our defined profile. How we will make to difference this in the profiles?
+**Required qualifications:**
+- `PYTHON`
+- `PANDAS`
+- `SCIKIT_LEARN`
+- `TENSORFLOW`
+- `POSTGRESQL`
+- `GIT`
 
-2. User can give different inputs that could mean the same qualification. 
-**Example:** *JavaScript | JS = Javascript*
-In our FST we must solve this.
+**Qualification order:**
 
-3. Information ignored in profile definition such candidate personal information, experience and more must be show helping with DSL.
+`PYTHON → PANDAS → SCIKIT_LEARN → TENSORFLOW → POSTGRESQL → GIT`
+
+A candidate matches this profile when the implementation recognizes the required qualifications in the configured order.
+
+## 3. Backend Developer
+
+**Domain:** Software Engineering
+
+**Required qualifications:**
+- `PYTHON`
+- `FASTAPI`
+- `POSTGRESQL`
+- `REST_API`
+- `DOCKER`
+- `GIT`
+
+**Qualification order:**
+
+`PYTHON → FASTAPI → POSTGRESQL → REST_API → DOCKER → GIT`
+
+A candidate matches this profile when the implementation recognizes the required qualifications in the configured order.
+
+## 4. Data Scientist
+
+**Domain:** AI/Data
+
+**Required qualifications:**
+- `PYTHON`
+- `PANDAS`
+- `NUMPY`
+- `SCIKIT_LEARN`
+- `SQL`
+- `GIT`
+
+**Qualification order:**
+
+`PYTHON → PANDAS → NUMPY → SCIKIT_LEARN → SQL → GIT`
+
+A candidate matches this profile when the implementation recognizes the required qualifications in the configured order.
+
+## Shared Classification Rules
+
+Some qualifications, such as `PYTHON`, `PANDAS`, `POSTGRESQL`, and `GIT`, can appear in more than one profile.
+
+Therefore, qualifications are not necessarily exclusive to a single professional profile. Classification depends on the required qualifications and their configured order for each profile.
+
+ResumeLens identifies matching qualification patterns. It does not rank candidates or make hiring decisions.
