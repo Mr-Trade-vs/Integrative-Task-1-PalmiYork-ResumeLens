@@ -3,9 +3,10 @@ from pathlib import Path
 from resumelens.core.config import load_profiles
 from resumelens.core.models import NormalizationResult, PipelineResult
 from resumelens.extraction import extract
-from resumelens.normalization import normalize, sort_for_profile
+from resumelens.normalization.transducer import normalize
+from resumelens.normalization.sorter import sort_for_profile
 from resumelens.classification import classify
-from resumelens.dsl import generate
+from resumelens.dsl.generator import generate
 from resumelens.visualization import render
 
 def process(text: str, profiles: dict | None = None) -> PipelineResult:
