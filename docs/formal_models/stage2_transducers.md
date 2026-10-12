@@ -1,6 +1,6 @@
 # Stage 2 — Finite-State Transducer Formalization
 
-ResumeLens models qualification normalization as a family of deterministic lexical transductions.
+ResumeLens models qualification normalization as one finite-state transducer whose input symbols are supported aliases and whose output symbols are canonical qualifications.
 
 ## General 7-tuple
 
@@ -12,7 +12,7 @@ For each alias mapping transducer:
 - **Σ** = finite input alphabet containing the alias strings used by the project
 - **Γ** = finite output alphabet containing canonical qualification symbols
 - **δ** = transition relation containing `(q0, alias, qf)` for every supported alias
-- **ω** = output relation mapping each alias to its canonical token
+- **ω** = output relation that emits the canonical token associated with each alias
 - **q0** = initial state
 - **F** = `{qf}`
 
@@ -40,4 +40,4 @@ stateDiagram-v2
     qf --> [*]
 ```
 
-The implementation constructs a `pyformlang.finite_transducer.Transducer` when the dependency is installed. The explicit mapping table is retained as the deterministic application layer so multi-token and punctuation-bearing aliases remain easy to inspect.
+The implementation constructs an `FST` from `pyformlang.fst`. Each transition consumes one complete extracted alias and emits one canonical qualification token. The normalizer calls the transducer's `translate` operation for each extracted qualification. The mapping table supplies the transducer's transitions and remains a fallback if pyformlang is unavailable, so the app can still run before the project dependencies are installed.

@@ -1,7 +1,7 @@
 try:
-    from pyformlang.finite_transducer import Transducer
+    from pyformlang.fst import FST
 except ImportError:
-    Transducer = None
+    FST = None
 
 NORMALIZATION = {
     "js": "JAVASCRIPT", "javascript": "JAVASCRIPT", "typescript": "TYPESCRIPT", "ts": "TYPESCRIPT",
@@ -17,17 +17,29 @@ NORMALIZATION = {
 }
 
 def build_pyformlang_transducer():
-    if Transducer is None:
+    """Build the alias-to-canonical-symbol transducer when pyformlang is available."""
+    if FST is None:
         return None
-    fst = Transducer()
+    fst = FST()
     for raw, canonical in NORMALIZATION.items():
-        fst.add_transition("q0", raw, "qf", canonical)
+        fst.add_transition("q0", raw, "qf", [canonical])
     fst.add_start_state("q0")
     fst.add_final_state("qf")
     return fst
 
+_TRANSDUCER = build_pyformlang_transducer()
+
+
 def normalize_one(value: str) -> str | None:
-    return NORMALIZATION.get(value.strip().lower())
+    alias = value.strip().lower()
+    if _TRANSDUCER is None:
+        # Keep the app usable in environments that have not installed requirements.txt.
+        return NORMALIZATION.get(alias)
+
+    translations = list(_TRANSDUCER.translate([alias]))
+    if not translations or not translations[0]:
+        return None
+    return translations[0][0]
 
 def normalize(values: list[str]) -> tuple[list[str], dict[str, str]]:
     mapping = {}
