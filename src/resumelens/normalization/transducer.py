@@ -1,7 +1,4 @@
-try:
-    from pyformlang.finite_transducer import Transducer
-except ImportError:
-    Transducer = None
+from pyformlang.fst import FST
 
 NORMALIZATION = {
     "js": "JAVASCRIPT", "javascript": "JAVASCRIPT", "typescript": "TYPESCRIPT", "ts": "TYPESCRIPT",
@@ -13,29 +10,53 @@ NORMALIZATION = {
     "pytorch": "PYTORCH", "py torch": "PYTORCH",
     "python": "PYTHON", "fastapi": "FASTAPI", "rest": "REST_API", "restful": "REST_API", "rest api": "REST_API",
     "docker": "DOCKER", "git": "GIT", "numpy": "NUMPY", "sql": "SQL",
-    "mysql": "MYSQL", "mongodb": "MONGODB", "mongo": "MONGODB"
+    "mysql": "MYSQL", "mongodb": "M ONGODB", "mongo": "MONGODB"
 }
 
-def build_pyformlang_transducer():
-    if Transducer is None:
-        return None
-    fst = Transducer()
+def build_pyformlang_FST():
+    fst = FST()
+
     for raw, canonical in NORMALIZATION.items():
-        fst.add_transition("q0", raw, "qf", canonical)
+        fst.add_transition(
+            "q0",
+            raw,
+            "qf",
+            [canonical]
+        )
+
     fst.add_start_state("q0")
     fst.add_final_state("qf")
+
     return fst
 
+_NORMALIZATION_FST = build_pyformlang_FST()
+
+
 def normalize_one(value: str) -> str | None:
-    return NORMALIZATION.get(value.strip().lower())
+    raw = value.strip().lower()
+
+    if not raw:
+        return None
+
+    outputs = list(_NORMALIZATION_FST.translate([raw]))
+
+    if not outputs or not outputs[0]:
+        return None
+
+    return outputs[0][0]
+
 
 def normalize(values: list[str]) -> tuple[list[str], dict[str, str]]:
     mapping = {}
     normalized = []
+
     for value in values:
         canonical = normalize_one(value)
-        if canonical:
+
+        if canonical is not None:
             mapping[value] = canonical
+
             if canonical not in normalized:
                 normalized.append(canonical)
+
     return normalized, mapping
