@@ -17,7 +17,7 @@ def test_special_characters_in_name():
     assert result.candidate.name == "Carlos"
     assert set(result.candidate.qualifications) >= {"C++", "C#", "Python"}
 
-def false_positive_extraction():
+def test_false_positive_extraction():
     text = """
     Ana
     Skills: Express.js, JavaScript.

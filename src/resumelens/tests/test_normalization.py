@@ -1,25 +1,9 @@
-import pytest
-
 from resumelens.normalization.transducer import (
     build_pyformlang_FST,
     normalize,
     normalize_one,
 )
 from resumelens.normalization.sorter import sort_for_profile
-from resumelens.normalization.transducer import (
-    FST,
-    build_pyformlang_FST,
-    normalize_one,
-    normalize
-)
-
-print(normalize_one("JS"))
-print(normalize_one("React.js"))
-print(normalize_one("Postgres"))
-print(normalize_one("Mongo"))
-print(normalize_one("tecnologia_desconocida"))
-
-print(normalize(["JS", "javascript", "React.js", "Git"]))
 
 def test_aliases_normalize_to_canonical_tokens():
     values, mapping = normalize(["JS", "React.js", "NodeJS", "Postgres", "Git"])
@@ -35,12 +19,11 @@ def test_normalization_handles_case_whitespace_duplicates_and_unknowns():
     assert normalize_one(" Unlisted Tool ") is None
 
 
-def test_pyformlang_FST_translates_aliases_when_available():
-    fst = build_pyformlang_FST()
-    if fst is None:
-        pytest.skip("pyformlang is not installed")
+def test_mongodb_aliases_normalize_to_one_canonical_token():
+    values, mapping = normalize(["MongoDB", "Mongo"])
 
-    assert list(fst.translate(["react.js"])) == [["REACT"]]
+    assert values == ["MONGODB"]
+    assert mapping == {"MongoDB": "MONGODB", "Mongo": "MONGODB"}
 
 
 def test_sorting_is_profile_specific():

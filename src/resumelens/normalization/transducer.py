@@ -10,7 +10,7 @@ NORMALIZATION = {
     "pytorch": "PYTORCH", "py torch": "PYTORCH",
     "python": "PYTHON", "fastapi": "FASTAPI", "rest": "REST_API", "restful": "REST_API", "rest api": "REST_API",
     "docker": "DOCKER", "git": "GIT", "numpy": "NUMPY", "sql": "SQL",
-    "mysql": "MYSQL", "mongodb": "M ONGODB", "mongo": "MONGODB"
+    "mysql": "MYSQL", "mongodb": "MONGODB", "mongo": "MONGODB"
 }
 
 def build_pyformlang_FST():
