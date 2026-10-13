@@ -29,3 +29,15 @@ def test_required_order_is_enforced_by_the_dfa():
     order = ["JAVASCRIPT", "REACT", "NODE_JS"]
 
     assert not accepts(["REACT", "JAVASCRIPT", "NODE_JS"], order)
+
+
+def test_classification_result_exposes_required_and_missing_qualifications():
+    from resumelens.classification.classifier import classify
+
+    results = classify(
+        {"Backend Developer": ["PYTHON", "FASTAPI", "POSTGRESQL"]},
+        {"Backend Developer": {"required": ["PYTHON", "FASTAPI", "POSTGRESQL", "REST_API"]}},
+    )
+
+    assert results[0].required == ["PYTHON", "FASTAPI", "POSTGRESQL", "REST_API"]
+    assert results[0].missing == ["REST_API"]

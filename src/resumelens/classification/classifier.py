@@ -7,5 +7,15 @@ def classify(sorted_by_profile: dict[str, list[str]], profiles: dict) -> list[Cl
         seq = sorted_by_profile[name]
         required = profile["required"]
         accepted = accepts(seq, required)
-        results.append(ClassificationResult(name, accepted, seq, explain(seq, required, accepted)))
+        missing = [qualification for qualification in required if qualification not in seq]
+        results.append(
+            ClassificationResult(
+                name,
+                accepted,
+                seq,
+                explain(seq, required, accepted),
+                required,
+                missing,
+            )
+        )
     return results

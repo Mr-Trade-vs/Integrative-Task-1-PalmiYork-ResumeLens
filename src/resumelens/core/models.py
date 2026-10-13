@@ -28,6 +28,8 @@ class ClassificationResult:
     accepted: bool
     sequence: list[str]
     explanation: str
+    required: list[str] = field(default_factory=list)
+    missing: list[str] = field(default_factory=list)
 
 @dataclass
 class PipelineResult:
