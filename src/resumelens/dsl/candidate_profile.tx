@@ -4,5 +4,5 @@ Contact: 'contact' '{' email=STRING phone=STRING '}';
 Experience: 'experience' company=STRING role=STRING years=INT ';';
 Education: 'education' value=STRING ';';
 Skill: 'skill' value=STRING ';';
-Classification: 'classification' profile=ID result=RESULT ';';
+Classification: 'classification' profile=ID result=RESULT explanation=STRING? ';';
 RESULT: /ACCEPTED|REJECTED/;

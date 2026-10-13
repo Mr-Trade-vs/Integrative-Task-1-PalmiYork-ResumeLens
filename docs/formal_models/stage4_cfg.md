@@ -9,7 +9,7 @@ Contact       ::= "contact" "{" STRING STRING "}" ;
 Experience    ::= "experience" STRING STRING INT ";" ;
 Education     ::= "education" STRING ";" ;
 Skill         ::= "skill" STRING ";" ;
-Classification ::= "classification" ID RESULT ";" ;
+Classification ::= "classification" ID RESULT [STRING] ";" ;
 RESULT        ::= "ACCEPTED" | "REJECTED" ;
 ```
 

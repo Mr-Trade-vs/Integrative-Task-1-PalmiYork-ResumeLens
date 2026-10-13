@@ -7,6 +7,7 @@ from resumelens.normalization.transducer import normalize
 from resumelens.normalization.sorter import sort_for_profile
 from resumelens.classification import classify
 from resumelens.dsl.generator import generate
+from resumelens.dsl.parser import validate
 from resumelens.visualization import render
 
 def process(text: str, profiles: dict | None = None) -> PipelineResult:
@@ -17,10 +18,10 @@ def process(text: str, profiles: dict | None = None) -> PipelineResult:
     sorted_by_profile = {name: sort_for_profile(normalized, p["order"]) for name, p in profiles.items()}
     normalization = NormalizationResult(normalized, mapping, sorted_by_profile)
     classifications = classify(sorted_by_profile, profiles)
-    dsl_text = generate(extraction.candidate, classifications)
-    provisional = PipelineResult(extraction, normalization, classifications, dsl_text, "")
-    provisional.html = render(provisional)
-    return provisional
+    dsl_text = generate(extraction.candidate, classifications, normalized)
+    profile_model = validate(dsl_text)
+    html = render(profile_model)
+    return PipelineResult(extraction, normalization, classifications, dsl_text, html)
 
 def main():
     parser = argparse.ArgumentParser(description="ResumeLens formal-language pipeline")

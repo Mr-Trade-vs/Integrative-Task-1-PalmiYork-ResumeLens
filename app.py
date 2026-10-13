@@ -1,5 +1,6 @@
 import streamlit as st
 from resumelens.core.pipeline import process
+from resumelens.dsl.parser import CandidateProfileValidationError
 
 st.set_page_config(page_title="ResumeLens", page_icon="📄", layout="wide")
 st.title("📄 ResumeLens")
@@ -8,7 +9,11 @@ st.caption("Formal Language-Based Resume Screening")
 sample = """Wednesday Addams\n3 years of experience developing web applications.\nEmail: wednesday@example.com\nTechnical Skills: JS, React.js, NodeJS, Postgres, Git.\nEducation: Computer Science.\n"""
 text = st.text_area("Paste résumé text", value=sample, height=260)
 if st.button("Process résumé", type="primary"):
-    result = process(text)
+    try:
+        result = process(text)
+    except CandidateProfileValidationError as exc:
+        st.error(str(exc))
+        st.stop()
     a, b, c = st.columns(3)
     with a:
         st.subheader("Stage 1 — Extraction")
